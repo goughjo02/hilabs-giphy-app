@@ -6,10 +6,19 @@ Nodejs version is specified in [the tool-versions file](./tool-versions)
 
 Package manager is pnpm version 9.7.0
 
-First, run the development server:
+First, install dependencies:
 
 ```bash
 pnpm install
+```
+
+## Run the app
+
+To run local development server. add env vars as in [.env.example](./.env.example)
+
+Then run
+
+```
 pnpm dev
 ```
 
@@ -34,3 +43,6 @@ pnpm test
 - d3 was used for animating the like button
 - tailwind css was used for styling
 - css variables were used for theme switching
+- local storage was used to persist state across page refreshes
+- infintie scrolling is achieved through a custom hook
+- preview of gifs is done using iframes
