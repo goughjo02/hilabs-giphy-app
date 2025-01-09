@@ -70,8 +70,8 @@ export const ListTrending = ({
         {hasData &&
           data.map((gif) => (
             <Dialog key={gif.id}>
-              <DialogTrigger>
-                <div className="flex items-center justify-center p-4 bg-primary/20 rounded-md gap-4">
+              <DialogTrigger asChild>
+                <div className="flex items-center justify-center p-4 bg-primary/20 rounded-md gap-4 cursor-pointer">
                   <div className="flex-grow flex items-center justify-center">
                     <p className="">{gif.title}</p>
                   </div>
@@ -80,7 +80,7 @@ export const ListTrending = ({
                   </div>
                 </div>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
                 <DialogHeader>
                   <DialogTitle className="flex items-center gap-2">
                     <LikeButton gif={gif} />
