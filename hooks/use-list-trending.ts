@@ -49,8 +49,12 @@ export const useListTrending = () => {
     },
   });
   const data = res.data?.map((e) => e.data).flat();
+  const dataWithNoRepeatedIds = data.filter(
+    // there is a weird bug where some ids are repeated
+    (e, i, self) => i === self.findIndex((t) => t.id === e.id)
+  );
   return {
     ...res,
-    data,
+    data: dataWithNoRepeatedIds,
   };
 };
