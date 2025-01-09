@@ -1,5 +1,7 @@
 ## Health Innovation Labs Giphy App
 
+see deployment here: https://hilabs-giphy-app.vercel.app/
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 Nodejs version is specified in [the tool-versions file](./tool-versions)
