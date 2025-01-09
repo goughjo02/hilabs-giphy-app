@@ -1,3 +1,4 @@
+"use client";
 import { type useListTrending } from "@/hooks/use-list-trending";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { createContext, type ReactNode, useContext } from "react";

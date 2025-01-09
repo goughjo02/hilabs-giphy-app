@@ -7,10 +7,13 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useFavorites } from "../providers/favorites-provider";
+import { LikeIcon } from "../ui/like-icon";
 
 type ListTrendingProps = {
   data: ReturnType<typeof useListTrending>["data"];
@@ -52,6 +55,14 @@ export const ListTrending = ({
     };
   }, [hasNextPage, isLoading]);
   const hasData = data.length > 0;
+  const { favorites, addFavorite, removeFavoriteById } = useFavorites();
+  const handleLikeClicked = (item: (typeof data)[0]) => {
+    if (favorites.some((fav) => fav.id === item.id)) {
+      removeFavoriteById(item.id);
+    } else {
+      addFavorite(item);
+    }
+  };
   return (
     <div className="container mx-auto pt-4">
       <h1 className="pt-4 pb-8 px-2 text-2xl ">Trending Gifs</h1>
@@ -60,13 +71,44 @@ export const ListTrending = ({
           data.map((gif) => (
             <Dialog key={gif.id}>
               <DialogTrigger>
-                <div className="flex items-center justify-center p-4 bg-gray-100 rounded-md">
-                  <p className="">{gif.title}</p>
+                <div className="flex items-center justify-center p-4 bg-primary/20 rounded-md gap-4">
+                  <div className="flex-grow flex items-center justify-center">
+                    <p className="">{gif.title}</p>
+                  </div>
+                  <div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLikeClicked(gif);
+                      }}
+                    >
+                      <LikeIcon
+                        isLiked={favorites.some((fav) => fav.id === gif.id)}
+                      />
+                    </Button>
+                  </div>
                 </div>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>{gif.title}</DialogTitle>
+                  <DialogTitle className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        handleLikeClicked(gif);
+                      }}
+                    >
+                      <LikeIcon
+                        isLiked={favorites.some((fav) => fav.id === gif.id)}
+                      />
+                    </Button>
+                    {gif.title}
+                  </DialogTitle>
                   <DialogDescription>
                     <iframe
                       src={gif.embed_url}
@@ -76,6 +118,19 @@ export const ListTrending = ({
                       className="w-full"
                     ></iframe>
                   </DialogDescription>
+                  <DialogFooter>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => {
+                        handleLikeClicked(gif);
+                      }}
+                    >
+                      {favorites.some((fav) => fav.id === gif.id)
+                        ? "Remove from favorites"
+                        : "Add to favorites"}
+                    </Button>
+                  </DialogFooter>
                 </DialogHeader>
               </DialogContent>
             </Dialog>

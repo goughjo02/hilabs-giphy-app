@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { ListTrending } from "./list-trending";
 import { generateMockGifs } from "@/lib/generate-mock-gifs";
+import { favoritesContext } from "@/components/providers/favorites-provider";
+
+const mockData = generateMockGifs(10);
 
 const meta = {
   title: "components/giphy/ListTrending",
@@ -9,11 +12,24 @@ const meta = {
   parameters: {},
   argTypes: {},
   args: {
-    data: generateMockGifs(10),
+    data: mockData,
     isLoading: false,
     hasNextPage: true,
     fetchNextPage: fn(),
   },
+  decorators: [
+    (Story) => (
+      <favoritesContext.Provider
+        value={{
+          favorites: [mockData[2], mockData[5], mockData[7]],
+          addFavorite: fn(),
+          removeFavoriteById: fn(),
+        }}
+      >
+        <Story />
+      </favoritesContext.Provider>
+    ),
+  ],
 } satisfies Meta<typeof ListTrending>;
 
 export default meta;

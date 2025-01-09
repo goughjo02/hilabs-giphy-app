@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Header } from "@/components/layout/heaader";
+import { FavoritesProvider } from "@/components/providers/favorites-provider";
 
 export const metadata: Metadata = {
   title: "Hilabs Giphy App",
@@ -23,8 +24,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
+          <FavoritesProvider>
+            <Header />
+            {children}
+          </FavoritesProvider>
         </ThemeProvider>
       </body>
     </html>
