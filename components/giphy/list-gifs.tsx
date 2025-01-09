@@ -74,7 +74,7 @@ export const ListGifs = ({
               <DialogTrigger asChild>
                 <div className="flex items-center justify-center p-4 bg-primary/20 rounded-md gap-4 cursor-pointer">
                   <div className="flex-grow flex items-center justify-center">
-                    <p className="">{gif.title}</p>
+                    <p className="text-center">{gif.title}</p>
                   </div>
                   <div>
                     <LikeButton gif={gif} />
