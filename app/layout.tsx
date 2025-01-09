@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Header } from "@/components/layout/heaader";
 import { FavoritesProvider } from "@/components/providers/favorites-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "Hilabs Giphy App",
@@ -25,8 +26,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <FavoritesProvider>
-            <Header />
-            {children}
+            <TooltipProvider>
+              <Header />
+              {children}
+            </TooltipProvider>
           </FavoritesProvider>
         </ThemeProvider>
       </body>

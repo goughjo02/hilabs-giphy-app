@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useFavorites } from "../providers/favorites-provider";
-import { LikeIcon } from "../ui/like-icon";
+import { LikeButton } from "./like-button";
 
 type ListTrendingProps = {
   data: ReturnType<typeof useListTrending>["data"];
@@ -76,37 +76,14 @@ export const ListTrending = ({
                     <p className="">{gif.title}</p>
                   </div>
                   <div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleLikeClicked(gif);
-                      }}
-                    >
-                      <LikeIcon
-                        isLiked={favorites.some((fav) => fav.id === gif.id)}
-                      />
-                    </Button>
+                    <LikeButton gif={gif} />
                   </div>
                 </div>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="flex items-center gap-2">
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => {
-                        handleLikeClicked(gif);
-                      }}
-                    >
-                      <LikeIcon
-                        isLiked={favorites.some((fav) => fav.id === gif.id)}
-                      />
-                    </Button>
+                    <LikeButton gif={gif} />
                     {gif.title}
                   </DialogTitle>
                   <DialogDescription>
