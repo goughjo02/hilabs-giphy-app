@@ -2,70 +2,8 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
-import { ListTrendingResponse } from "@/components/schema/list-trending-response-schema";
-import { useListTrending } from "./use-list-trending";
-
-export const mockGifOne: ListTrendingResponse["data"][number] = {
-  type: "gif",
-  id: "id-one",
-  slug: "slug-one",
-  url: "url-one",
-  bitly_url: "bitly_url-one",
-  embed_url: "embed_url-one",
-  username: "username-one",
-  source: "source-one",
-  rating: "rating-one",
-  content_url: "content_url-one",
-  user: {
-    avatar_url: "avatar_url-one",
-    banner_url: "banner_url-one",
-    profile_url: "profile_url-one",
-    username: "username-one",
-    display_name: "display_name-one",
-  },
-  source_tld: "source_tld-one",
-  source_post_url: "source_post_url-one",
-  update_datetime: "update_datetime-one",
-  create_datetime: "create_datetime-one",
-  import_datetime: "import_datetime-one",
-  trending_datetime: "trending_datetime-one",
-  images: {
-    // Define the images object schema here if needed
-  },
-  title: "title-one",
-  alt_text: "alt_text-one",
-};
-
-export const mockGifTwo: ListTrendingResponse["data"][number] = {
-  type: "gif",
-  id: "id-two",
-  slug: "slug-two",
-  url: "url-two",
-  bitly_url: "bitly_url-two",
-  embed_url: "embed_url-two",
-  username: "username-two",
-  source: "source-two",
-  rating: "rating-two",
-  content_url: "content_url-two",
-  user: {
-    avatar_url: "avatar_url-two",
-    banner_url: "banner_url-two",
-    profile_url: "profile_url-two",
-    username: "username-two",
-    display_name: "display_name-two",
-  },
-  source_tld: "source_tld-two",
-  source_post_url: "source_post_url-two",
-  update_datetime: "update_datetime-two",
-  create_datetime: "create_datetime-two",
-  import_datetime: "import_datetime-two",
-  trending_datetime: "trending_datetime-two",
-  images: {
-    // Define the images object schema here if needed
-  },
-  title: "title-two",
-  alt_text: "alt_text-two",
-};
+import { mockGifOne, mockGifTwo } from "./use-list-trending.test";
+import { useSearch } from "./use-search";
 
 const pagination = {
   total_count: 2,
@@ -79,7 +17,7 @@ const meta = {
   response_id: "response-id",
 };
 
-const apiEndpoint = "/api/list-trending";
+const apiEndpoint = "/api/search";
 
 export const handlers = [
   http.get(apiEndpoint, () => {
@@ -93,7 +31,7 @@ export const handlers = [
 
 const server = setupServer(...handlers);
 
-describe("useListTrendingGiphy", () => {
+describe("useSearch", () => {
   beforeAll(() => {
     server.listen();
   });
@@ -110,7 +48,11 @@ describe("useListTrendingGiphy", () => {
         });
       })
     );
-    const { result } = renderHook(() => useListTrending());
+    const { result } = renderHook(() =>
+      useSearch({
+        searchQuery: "test",
+      })
+    );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
@@ -127,7 +69,11 @@ describe("useListTrendingGiphy", () => {
         });
       })
     );
-    const { result } = renderHook(() => useListTrending());
+    const { result } = renderHook(() =>
+      useSearch({
+        searchQuery: "test",
+      })
+    );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
