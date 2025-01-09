@@ -11,12 +11,14 @@ interface UseInfiniteQueryOptions<TPageParam, TData> {
     allPages: TData[]
   ) => TPageParam | undefined;
   initialPageParam: TPageParam;
+  enabled?: boolean;
 }
 
 export const useInfiniteQuery = <TPageParam, TData, TError = Error>({
   queryFn,
   getNextPageParam,
   initialPageParam,
+  enabled = true,
 }: UseInfiniteQueryOptions<TPageParam, TData>) => {
   const [data, setData] = useState<TData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,11 +68,11 @@ export const useInfiniteQuery = <TPageParam, TData, TError = Error>({
   }, [initialPageParam]);
 
   useEffect(() => {
-    if (!initialFetchRef.current) {
+    if (!initialFetchRef.current && enabled) {
       initialFetchRef.current = true;
       fetchNextPage();
     }
-  }, [fetchNextPage]);
+  }, [fetchNextPage, enabled]);
 
   return {
     data,
