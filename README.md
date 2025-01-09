@@ -49,3 +49,7 @@ pnpm test
 - infintie scrolling is achieved through a custom hook
 - preview of gifs is done using iframes
 - theme-toggle button animations is done via keyframes
+- vitest is test runner
+- react-testing-library for react-specific testing
+- msw (mock service worker) acts as http interceptor in tests
+- Storybook was used for component visual development
