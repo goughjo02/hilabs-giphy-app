@@ -3,6 +3,7 @@ import { fn } from "@storybook/test";
 import { ListGifs } from "./list-gifs";
 import { generateMockGifs } from "@/lib/generate-mock-gifs";
 import { favoritesContext } from "@/components/providers/favorites-provider";
+import { TooltipProvider } from "../ui/tooltip";
 
 const mockData = generateMockGifs(10);
 
@@ -26,7 +27,9 @@ const meta = {
           removeFavoriteById: fn(),
         }}
       >
-        <Story />
+        <TooltipProvider>
+          <Story />
+        </TooltipProvider>
       </favoritesContext.Provider>
     ),
   ],
