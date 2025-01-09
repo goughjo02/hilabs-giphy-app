@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { ListTrending } from "./list-trending";
+import { ListGifs } from "./list-gifs";
 import { generateMockGifs } from "@/lib/generate-mock-gifs";
 import { favoritesContext } from "@/components/providers/favorites-provider";
 
 const mockData = generateMockGifs(10);
 
 const meta = {
-  title: "components/giphy/ListTrending",
-  component: ListTrending,
+  title: "components/giphy/ListGifs",
+  component: ListGifs,
   parameters: {},
   argTypes: {},
   args: {
@@ -30,7 +30,7 @@ const meta = {
       </favoritesContext.Provider>
     ),
   ],
-} satisfies Meta<typeof ListTrending>;
+} satisfies Meta<typeof ListGifs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

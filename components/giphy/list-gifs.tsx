@@ -23,7 +23,7 @@ type ListTrendingProps = {
   enabled?: boolean;
 };
 
-export const ListTrending = ({
+export const ListGifs = ({
   data,
   isLoading,
   hasNextPage,
