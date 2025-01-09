@@ -8,21 +8,25 @@ export async function GET(req: NextRequest) {
 
   const giphyApiKey = process.env["GIPHY_API_KEY"];
   if (!giphyApiKey) {
-    return {
-      status: 500,
-      json: {
+    return new Response(
+      JSON.stringify({
         error: "Missing GIPHY_API_KEY environment variable",
-      },
-    };
+      }),
+      {
+        status: 500,
+      }
+    );
   }
   const giphyApiBaseUrlUnprocessed = process.env["GIPHY_API_BASE_URL"];
   if (!giphyApiBaseUrlUnprocessed) {
-    return {
-      status: 500,
-      json: {
+    return new Response(
+      JSON.stringify({
         error: "Missing GIPHY_API_BASE_URL environment variable",
-      },
-    };
+      }),
+      {
+        status: 500,
+      }
+    );
   }
   const giphyApiBaseUrl = giphyApiBaseUrlUnprocessed.endsWith("/")
     ? giphyApiBaseUrlUnprocessed.slice(0, -1)
