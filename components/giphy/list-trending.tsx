@@ -20,6 +20,7 @@ type ListTrendingProps = {
   isLoading: boolean;
   hasNextPage: boolean;
   fetchNextPage: () => void;
+  enabled?: boolean;
 };
 
 export const ListTrending = ({
@@ -27,13 +28,14 @@ export const ListTrending = ({
   isLoading,
   hasNextPage,
   fetchNextPage,
+  enabled = true,
 }: ListTrendingProps) => {
   const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isLoading) {
+        if (entries[0].isIntersecting && hasNextPage && !isLoading && enabled) {
           fetchNextPage();
         }
       },
@@ -65,7 +67,6 @@ export const ListTrending = ({
   };
   return (
     <div className="container mx-auto pt-4">
-      <h1 className="pt-4 pb-8 px-2 text-2xl ">Trending Gifs</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {hasData &&
           data.map((gif) => (
@@ -125,21 +126,23 @@ export const ListTrending = ({
           </>
         )}
       </div>
-      <div className="p-4 mt-4 ">
-        {hasNextPage ? (
-          <Button
-            type="button"
-            variant={"ghost"}
-            onClick={fetchNextPage}
-            disabled={isLoading || !hasNextPage}
-            ref={loadMoreButtonRef}
-          >
-            {isLoading ? "Loading..." : "Load more"}
-          </Button>
-        ) : (
-          <p>No more gifs to load</p>
-        )}
-      </div>
+      {enabled && (
+        <div className="p-4 mt-4 ">
+          {hasNextPage ? (
+            <Button
+              type="button"
+              variant={"ghost"}
+              onClick={fetchNextPage}
+              disabled={isLoading || !hasNextPage}
+              ref={loadMoreButtonRef}
+            >
+              {isLoading ? "Loading..." : "Load more"}
+            </Button>
+          ) : (
+            <p>No more gifs to load</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
