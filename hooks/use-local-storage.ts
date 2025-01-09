@@ -12,6 +12,9 @@ export function useLocalStorage<TData>({
 }) {
   const [storedValue, setStoredValue] = useState<TData>(() => {
     try {
+      if (typeof window === "undefined") {
+        return initialValue;
+      }
       const item = window.localStorage.getItem(key);
       const parsed = item ? JSON.parse(item) : initialValue;
       if (dataValidator && !dataValidator(parsed)) {
