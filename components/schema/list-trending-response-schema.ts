@@ -39,18 +39,22 @@ export type ListTrendingItemsArray = z.infer<
   typeof ListTrendingItemsArraySchema
 >;
 
+export const PaginationSchema = z.object({
+  total_count: z.number(),
+  count: z.number(),
+  offset: z.number(),
+});
+
+export const MetaSchema = z.object({
+  status: z.number(),
+  msg: z.string(),
+  response_id: z.string(),
+});
+
 export const ListTrendingResponseSchema = z.object({
   data: z.array(ListTrendingItemSchema),
-  pagination: z.object({
-    total_count: z.number(),
-    count: z.number(),
-    offset: z.number(),
-  }),
-  meta: z.object({
-    status: z.number(),
-    msg: z.string(),
-    response_id: z.string(),
-  }),
+  pagination: PaginationSchema,
+  meta: MetaSchema,
 });
 
 export type ListTrendingResponse = z.infer<typeof ListTrendingResponseSchema>;
