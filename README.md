@@ -48,3 +48,4 @@ pnpm test
 - local storage was used to persist state across page refreshes
 - infintie scrolling is achieved through a custom hook
 - preview of gifs is done using iframes
+- theme-toggle button animations is done via keyframes
