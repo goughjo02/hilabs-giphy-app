@@ -1,6 +1,6 @@
 ## Health Innovation Labs Giphy App
 
-see deployment here: https://hilabs-giphy-app.vercel.app/
+see deployment here: https://hilabs-giphy-app.vercel.app/ (note that my api key is a beta key so limited to 100 requests per hour)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
