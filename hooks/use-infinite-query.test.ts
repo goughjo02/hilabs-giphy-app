@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import { useInfiniteQuery } from "./use-infinite-query";
 
 describe("useInfiniteQuery", () => {
-  test("calls queryFn on render", async () => {
+  test("calls queryFn and getNextPageParams on render", async () => {
     const queryFn: (args: {
       limit: number;
       offset: number;
@@ -24,7 +24,7 @@ describe("useInfiniteQuery", () => {
       expect(queryFn).toHaveBeenCalledWith({ limit: 0, offset: 0 });
     });
   });
-  test("calls getNextPageParam with last page and current page param", async () => {
+  test("fetchNextPage calls queryFn and getNextPageParams for a second time", async () => {
     const queryFn: (args: { limit: number; offset: number }) => Promise<{
       data: string[];
       pagination: {
