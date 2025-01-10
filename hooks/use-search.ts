@@ -21,7 +21,6 @@ const queryFn = async ({
     `/api/search?query=${searchQuery}&limit=${limit}&offset=${offset}`
   );
   const json = await res.json();
-  // Assuming you have a schema to validate the response
   const safeParseResponse = SearchResponseSchema.safeParse(json);
 
   if (!safeParseResponse.success) {
