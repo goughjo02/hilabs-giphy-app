@@ -6,6 +6,8 @@ import {
 } from "@/components/schema/search-response-schema";
 import { useInfiniteQuery } from "./use-infinite-query";
 
+const limit = 10;
+
 const queryFn = async ({
   searchQuery,
   limit,
@@ -47,7 +49,7 @@ export const useSearch = ({
     ) {
       return {
         searchQuery: searchQuery,
-        limit: 10,
+        limit,
         offset: newData.map((e) => e.data).flat().length,
       };
     }
@@ -58,7 +60,7 @@ export const useSearch = ({
     getNextPageParam,
     initialPageParam: {
       searchQuery,
-      limit: 10,
+      limit,
       offset: 0,
     },
     enabled,

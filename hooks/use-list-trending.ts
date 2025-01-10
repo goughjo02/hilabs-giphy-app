@@ -4,6 +4,8 @@ import {
 } from "@/components/schema/list-trending-response-schema";
 import { useInfiniteQuery } from "./use-infinite-query";
 
+const limit = 10;
+
 const queryFn = async ({
   limit,
   offset,
@@ -32,7 +34,7 @@ const getNextPageParam = (
     lastPage.pagination.total_count > newData.map((e) => e.data).flat().length
   ) {
     return {
-      limit: 10,
+      limit,
       offset: newData.map((e) => e.data).flat().length,
     };
   }
@@ -44,7 +46,7 @@ export const useListTrending = () => {
     queryFn,
     getNextPageParam,
     initialPageParam: {
-      limit: 10,
+      limit,
       offset: 0,
     },
   });
