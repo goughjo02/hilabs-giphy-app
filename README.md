@@ -1,12 +1,20 @@
 ## Health Innovation Labs Giphy App
 
-see deployment here: https://hilabs-giphy-app.vercel.app/ (note that my api key is a beta key so limited to 100 requests per hour)
-
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Demo
+
+Deployed here: https://hilabs-giphy-app.vercel.app/ (note that my api key is a beta key so limited to 100 requests per hour)
+
+Demo video here: https://github.com/goughjo02/hilabs-giphy-app/issues/1
+
+## Tool versions
 
 Nodejs version is specified in [the tool-versions file](./tool-versions)
 
 Package manager is pnpm version 9.7.0
+
+## Setup
 
 First, install dependencies:
 
@@ -16,7 +24,14 @@ pnpm install
 
 ## Run the app
 
-To run local development server. add env vars as in [.env.example](./.env.example)
+To run local development server. add env vars as in [.env.example](./.env.example) to .env
+
+I obviously would obviously not usually do this, but here are contents of the .env file that can get you up and running quickly
+
+```
+GIPHY_API_BASE_URL="https://api.giphy.com"
+GIPHY_API_KEY="gjDuxifNFmDRPmrdKzTLrmrO3Bstchwc"
+```
 
 Then run
 
