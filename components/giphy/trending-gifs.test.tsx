@@ -4,7 +4,6 @@ import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { mockGifOne, mockGifTwo } from "@/hooks/use-list-trending.test";
 import { render } from "@/lib/test-helpers";
-import userEvent from "@testing-library/user-event";
 import { TrendingGifs } from "./trending-gifs";
 
 const pagination = {

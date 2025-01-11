@@ -33,6 +33,7 @@ export const ListGifs = ({
   const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
+    const loadMoreButton = loadMoreButtonRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasNextPage && !isLoading && enabled) {
@@ -46,16 +47,16 @@ export const ListGifs = ({
       }
     );
 
-    if (loadMoreButtonRef.current) {
-      observer.observe(loadMoreButtonRef.current);
+    if (loadMoreButton) {
+      observer.observe(loadMoreButton);
     }
 
     return () => {
-      if (loadMoreButtonRef.current) {
-        observer.unobserve(loadMoreButtonRef.current);
+      if (loadMoreButton) {
+        observer.unobserve(loadMoreButton);
       }
     };
-  }, [hasNextPage, isLoading]);
+  }, [hasNextPage, isLoading, enabled, fetchNextPage]);
   const hasData = data.length > 0;
   const { favorites, addFavorite, removeFavoriteById } = useFavorites();
   const handleLikeClicked = (item: (typeof data)[0]) => {

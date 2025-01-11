@@ -43,7 +43,7 @@ export const Primary: Story = {
   args: {},
 };
 
-export const loadingNoData: Story = {
+export const LoadingNoData: Story = {
   args: {
     data: [],
     isLoading: true,

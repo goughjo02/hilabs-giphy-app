@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { FunctionComponent, type ReactNode } from "react";
 import { render as rttlRender } from "@testing-library/react";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { FavoritesProvider } from "@/components/providers/favorites-provider";
@@ -24,14 +24,19 @@ export const render = (
   }
 ) => {
   const extraWrappers = options?.extraWrappers ?? [];
-  const Wrapper = extraWrappers.reduce(
-    (acc, Wrapper) =>
-      ({ children }) =>
-        <Wrapper>{acc({ children })}</Wrapper>,
-    BaseWrapper
-  );
+  const wrapper: FunctionComponent<{
+    children: ReactNode;
+  }> = extraWrappers.reduce((acc, Wrapper) => {
+    const newComponent = ({ children }: { children: ReactNode }) => (
+      <Wrapper>{acc({ children })}</Wrapper>
+    );
+    newComponent.displayName = "Wrapper";
+    return newComponent;
+  }, BaseWrapper);
+  wrapper.displayName = "TestWrapper";
+
   return rttlRender(ui, {
     ...options,
-    wrapper: Wrapper,
+    wrapper,
   });
 };
