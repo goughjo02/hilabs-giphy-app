@@ -24,7 +24,11 @@ export const SearchGifs = () => {
     <div>
       <div className="container mx-auto">
         <h1 className="pt-4 pb-8 px-2 text-2xl ">{"Search Gifs"}</h1>
+        <label htmlFor="search" className="sr-only">
+          {"Search GIFs"}
+        </label>
         <Input
+          id="search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search GIFs"
