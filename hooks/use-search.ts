@@ -5,6 +5,7 @@ import {
   SearchResponseSchema,
 } from "@/components/schema/search-response-schema";
 import { useInfiniteQuery } from "./use-infinite-query";
+import { useEffect } from "react";
 
 const limit = 10;
 
@@ -64,6 +65,11 @@ export const useSearch = ({
     },
     enabled,
   });
+  useEffect(() => {
+    if (enabled) {
+      res.reset();
+    }
+  }, [enabled, searchQuery]);
   const data = res.data?.map((e) => e.data).flat();
   return {
     ...res,

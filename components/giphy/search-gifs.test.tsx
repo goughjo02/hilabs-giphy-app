@@ -2,13 +2,13 @@ import { screen, waitFor } from "@testing-library/react";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
-import { mockGifOne } from "@/hooks/use-list-trending.test";
+import { mockGifOne, mockGifTwo } from "@/hooks/use-list-trending.test";
 import { render } from "@/lib/test-helpers";
 import { SearchGifs } from "./search-gifs";
 import userEvent from "@testing-library/user-event";
 
 const pagination = {
-  total_count: 2,
+  total_count: 1,
   count: 0,
   offset: 0,
 };
@@ -56,5 +56,20 @@ describe("SearchGifs", () => {
     await waitFor(() => {
       expect(screen.getByText("title-one")).toBeDefined();
     });
+    expect(() => screen.getByText("title-two")).toThrow();
+    server.use(
+      http.get(apiEndpoint, () => {
+        return HttpResponse.json({
+          data: [mockGifTwo],
+          pagination,
+          meta,
+        });
+      })
+    );
+    await userEvent.type(input, "cats");
+    await waitFor(() => {
+      expect(screen.getByText("title-two")).toBeDefined();
+    });
+    expect(() => screen.getByText("title-one")).toThrow();
   });
 });
