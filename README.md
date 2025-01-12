@@ -6,8 +6,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 Deployed here: https://hilabs-giphy-app.vercel.app/ (note that my api key is a beta key so limited to 100 requests per hour)
 
-Demo video here: https://github.com/goughjo02/hilabs-giphy-app/issues/1
-
 ## Tool versions
 
 Nodejs version is specified in [the tool-versions file](./tool-versions)
